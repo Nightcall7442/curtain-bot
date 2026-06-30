@@ -2371,6 +2371,8 @@ async def start_order_creation(message: Message, state: FSMContext) -> None:
         return
 
     user = await db.get_user(user_id)
+    if not user:
+        return
     if Role(user["role"]) not in (Role.SELLER, Role.CEO, Role.ADMIN):
         await message.answer("🚫 Нет доступа.")
         return
@@ -4204,6 +4206,8 @@ async def admin_pending_orders(message: Message) -> None:
     """Просмотр заказов, ожидающих назначения мастера."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.ADMIN, Role.CEO):
         await message.answer("🚫 Нет доступа.")
@@ -4349,6 +4353,8 @@ async def admin_orders_from_masters(message: Message) -> None:
     """Просмотр заказов, ожидающих передачи швее."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.ADMIN, Role.CEO):
         await message.answer("🚫 Нет доступа.")
@@ -4427,6 +4433,8 @@ async def admin_orders_from_sewers(message: Message) -> None:
     """Просмотр заказов, ожидающих назначения установщика."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.ADMIN, Role.CEO):
         await message.answer("🚫 Нет доступа.")
@@ -4601,6 +4609,8 @@ async def master_new_orders(message: Message) -> None:
     """Просмотр новых заказов для мастера."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.MASTER, Role.CEO, Role.ADMIN):
         return
@@ -4643,6 +4653,8 @@ async def master_accept_order(callback: CallbackQuery) -> None:
         return
 
     user = await db.get_user(user_id)
+    if not user:
+        return
     if Role(user["role"]) not in (Role.MASTER, Role.CEO, Role.ADMIN):
         await callback.answer("❌ Только мастер может принять заказ", show_alert=True)
         return
@@ -4817,6 +4829,8 @@ async def installer_orders(message: Message) -> None:
     """Просмотр заказов на установку для установщика."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.INSTALLER, Role.CEO, Role.ADMIN):
         return
@@ -5670,6 +5684,8 @@ async def today_shifts(message: Message) -> None:
     """Просмотр сотрудников на смене сегодня."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.CEO, Role.ADMIN):
         await message.answer("🚫 Нет доступа.")
@@ -5783,6 +5799,8 @@ async def dashboard(message: Message) -> None:
     """Показ дашборда со статистикой."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.CEO, Role.ADMIN, Role.SMM):
         await message.answer("🚫 Нет доступа.")
@@ -5956,6 +5974,8 @@ async def all_orders(message: Message) -> None:
     """Просмотр всех заказов."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.CEO, Role.ADMIN, Role.SMM):
         await message.answer("🚫 Нет доступа.")
@@ -6019,6 +6039,8 @@ async def export_csv(message: Message) -> None:
     """Экспорт заказов в CSV."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.CEO, Role.ADMIN):
         await message.answer("🚫 Нет доступа.")
@@ -6034,6 +6056,8 @@ async def export_excel(message: Message) -> None:
     """Экспорт заказов в формате Excel (CSV с другим расширением)."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.CEO, Role.ADMIN):
         await message.answer("🚫 Нет доступа.")
@@ -6053,6 +6077,8 @@ async def start_material(message: Message, state: FSMContext) -> None:
     """Добавление материала к заказу (швея)."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.SEWER, Role.CEO, Role.ADMIN):
         return
@@ -6515,6 +6541,8 @@ async def admin_assign_installer_button(message: Message) -> None:
     """Кнопка назначения установщика (для администратора)."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.ADMIN, Role.CEO):
         await message.answer("🚫 Нет доступа.")
@@ -6537,6 +6565,8 @@ async def installer_complete_button(message: Message) -> None:
     """Кнопка завершения работы для установщика."""
     user_id = message.from_user.id
     user = await db.get_user(user_id)
+    if not user:
+        return
 
     if Role(user["role"]) not in (Role.INSTALLER, Role.CEO, Role.ADMIN):
         await message.answer("🚫 Нет доступа.")

@@ -1,0 +1,42 @@
+services:
+  - type: worker
+    name: curtain-bot
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: DB_PATH
+        value: /data/curtain_bot_v3.db
+      - key: CEO_IDS
+        sync: false
+      - key: ADMIN_IDS
+        sync: false
+      - key: SELLER_IDS
+        sync: false
+      - key: MASTER_IDS
+        sync: false
+      - key: SEWER_IDS
+        sync: false
+      - key: INSTALLER_IDS
+        sync: false
+      - key: SMM_IDS
+        sync: false
+      - key: CEO_NAMES
+        sync: false
+      - key: ADMIN_NAMES
+        sync: false
+      - key: SELLER_NAMES
+        sync: false
+      - key: MASTER_NAMES
+        sync: false
+      - key: SEWER_NAMES
+        sync: false
+      - key: INSTALLER_NAMES
+        sync: false
+      - key: SMM_NAMES
+        sync: false
+      - key: NOTIFICATION_GROUP_ID
+        sync: false
+      - key: CATALOG_PATH
+        value: catalog
